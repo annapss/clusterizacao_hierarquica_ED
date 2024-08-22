@@ -4,7 +4,7 @@ public class Main {
 		long  tempoMedio = 0;
 		for(int i = 0; i < 10; i++)
 		{
-			Ponto[] listaPontos = GeraPontos.geraPontos(100);
+			Arvbin<Ponto>[] listaPontos = GeraPontos.geraPontos(100);
 			/*for(int i = 0; i < listaPontos.length; i++)
 			{
 				System.out.println(listaPontos[i]);

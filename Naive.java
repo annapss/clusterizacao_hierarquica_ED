@@ -13,6 +13,11 @@ public class Naive {
 			arvore[i] = new Arvbin<Ponto>(pontos[i]);
 		}
 	}
+
+	public Naive(Arvbin<Ponto>[] arv) {
+		this.arvore = arv;
+		this.restante = arv.length;
+	}
 	
 	public Arvbin<Ponto> clusterizacaoHierarquica()
 	{
