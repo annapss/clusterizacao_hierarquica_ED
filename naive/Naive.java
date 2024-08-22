@@ -1,3 +1,4 @@
+package naive;
 
 public class Naive {
 	private Arvbin<Ponto>[] arvore;

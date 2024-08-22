@@ -1,3 +1,4 @@
+package naive;
 
 public class Ponto {
 	private float x;

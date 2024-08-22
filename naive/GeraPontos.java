@@ -1,3 +1,4 @@
+package naive;
 import java.util.Random;
 public class GeraPontos {
 	public static Arvbin<Ponto>[] geraPontos(int n)
