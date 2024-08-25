@@ -1,20 +1,20 @@
 package naive;
-
+import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		long  tempoMedio = 0;
-		for(int i = 0; i < 10; i++)
+		System.out.println("Quantos pontos devem ser gerados? ");
+		Scanner scan = new Scanner(System.in);
+		int qtdPontos = scan.nextInt();
+		for(int i = 0; i < 10; i++) //executa a clusterização 10 vezes para 10 entradas diferentes
 		{
-			Arvbin<Ponto>[] listaPontos = GeraPontos.geraPontos(100);
-			/*for(int i = 0; i < listaPontos.length; i++)
-			{
-				System.out.println(listaPontos[i]);
-			}*/
+			Arvbin[] listaClusters = GeraPontos.geraPontos(qtdPontos);
+			//Arvbin[] listaClusters = GeraPontos.criaPontos(6);
 			long t0 = System.currentTimeMillis();	
 
-			Naive naive = new Naive(listaPontos);
-			Arvbin<Ponto> pontosMin = naive.clusterizacaoHierarquica();
-			pontosMin.mostra();
+			Naive naive = new Naive(listaClusters);
+			Arvbin arvore = naive.clusterizacaoHierarquica();
+			arvore.mostra(); // imprime arvore mostrando todos os clusters que foram criados
 			
 			long t1 = System.currentTimeMillis();
 			

@@ -1,9 +1,9 @@
 package naive;
 
-public class Ponto {
+public class Cluster {
 	private float x;
 	private float y;
-	public Ponto(float x, float y) {
+	public Cluster(float x, float y) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -24,10 +24,15 @@ public class Ponto {
 	public String toString() {
 		return "Ponto [x=" + x + ", y=" + y + "]";
 	}
-	public float distanciaPonto(Ponto b)
+	public float distanciaPonto(Cluster b)
 	{
 		double parte1 = Math.pow(this.x - b.getX(), 2);
 		double parte2 = Math.pow(this.y - b.getY(), 2);
 		return (float)Math.pow(parte1 + parte2, 0.5);
+	}
+	@Override
+	public boolean equals(Object o)
+	{
+		return this.x == ((Cluster)o).getX() && this.y == ((Cluster)o).getY();
 	}
 }

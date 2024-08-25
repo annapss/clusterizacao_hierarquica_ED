@@ -1,31 +1,32 @@
 package filaPrioridade;
-import naive.Ponto;
+import naive.Arvbin;
+import naive.Cluster;
 public class Distancia {
-	private Ponto a;
-	private Ponto b;
+	private Arvbin clusterA;
+	private Arvbin clusterB;
 	private float distancia;
 	
-	public Distancia(Ponto a, Ponto b)
+	public Distancia(Arvbin clusterA, Arvbin clusterB)
 	{
-		this.a = a;
-		this.b = b;
-		distancia = a.distanciaPonto(b);
+		this.clusterA = clusterA;
+		this.clusterB = clusterB;
+		distancia = clusterA.retornaVal().distanciaPonto(clusterB.retornaVal());
 	}
 
-	public Ponto getA() {
-		return a;
+	public Arvbin getClusterA() {
+		return clusterA;
 	}
 
-	public void setA(Ponto a) {
-		this.a = a;
+	public void setClusterA(Arvbin clusterA) {
+		this.clusterA = clusterA;
 	}
 
-	public Ponto getB() {
-		return b;
+	public Arvbin getClusterB() {
+		return clusterB;
 	}
 
-	public void setB(Ponto b) {
-		this.b = b;
+	public void setClusterB(Arvbin clusterB) {
+		this.clusterB = clusterB;
 	}
 
 	public float getDistancia() {
@@ -35,4 +36,14 @@ public class Distancia {
 	public void setDistancia(float distancia) {
 		this.distancia = distancia;
 	}
+
+	public Arvbin temPonto(Cluster c)
+	{
+		if(c.equals(clusterA.retornaVal()))
+			return clusterB;
+		else if(c.equals(clusterB.retornaVal()))
+			return clusterA;
+		return null;
+	}
+	
 }

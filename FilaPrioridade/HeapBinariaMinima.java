@@ -1,23 +1,25 @@
 package filaPrioridade;
-public class HeapBinariaMinima<T>
+import naive.Arvbin;
+import naive.Cluster;
+public class HeapBinariaMinima
 {
 	private int n;               /* Numero de elementos no heap. */   
 	private int tam;             /* Tamanho máximo do heap. */
-	private Object[] vetor;          /* Vetor com elementos. */
+	private Distancia[] vetor;          /* Vetor com elementos. */
 
 	/* Constrói heap vazio. */
 	public HeapBinariaMinima(int tamanho)
 	{
 		n = 0;
 		tam = tamanho;
-		vetor = new Object[tamanho+1];
+		vetor = new Distancia[tamanho+1];
 	}
 
 	/* Constrói heap a partir de vetor v. */
-	public HeapBinariaMinima(int tamanho, T[] v)
+	public HeapBinariaMinima(int tamanho, Distancia[] v)
 	{
 		tam = tamanho;
-		vetor = new Object[tamanho+1];
+		vetor = new Distancia[tamanho+1];
 		n = tamanho;
 
 		for( int i = 0; i < tamanho; i++ )
@@ -52,26 +54,26 @@ public class HeapBinariaMinima<T>
 
 	/* Busca o menor item na fila de prioridades.
 	   Retorna o menor item em itemMin e true, ou falso se a heap estiver vazia. */
-	public Object min()
+	public Distancia min()
 	{
 		if (this.vazia())
 		{
 			System.out.println("Fila de prioridades vazia!");
-			return Integer.MAX_VALUE;
+			return null;
 		}
 
 		return vetor[1];
 	}
 
 	/* Remove o menor item da lista de prioridades e coloca ele em itemMin. */
-	public Object removeMin()
+	public Distancia removeMin()
 	{
-		Object itemMin;
+		Distancia itemMin;
 		
 		if(this.vazia())
 		{
 			System.out.println("Fila de prioridades vazia!");
-			return Integer.MAX_VALUE;
+			return null;
 		}
 
 		itemMin = vetor[1];
@@ -94,7 +96,7 @@ public class HeapBinariaMinima<T>
 	 * não está sendo respeitada pelo nó i. */
 	private void refaz(int i)
 	{
-		Object x = vetor[ i ];
+		Distancia x = vetor[ i ];
 
 		while(2*i <= n)
 		{
@@ -110,7 +112,7 @@ public class HeapBinariaMinima<T>
 			if(filhoDir <= n)
 			{
 				 /* Em caso positivo, verifica se é menor que o filho esquerdo. */
-				if(((Distancia)vetor[ filhoDir ]).getDistancia() < ((Distancia)vetor[ filhoEsq ]).getDistancia())
+				if(vetor[ filhoDir ].getDistancia() < vetor[ filhoEsq ].getDistancia())
 					menorFilho = filhoDir;
 			}
 
@@ -131,7 +133,7 @@ public class HeapBinariaMinima<T>
 
 	/* Insere item x na fila de prioridade, mantendo a propriedade do heap.
 	 * São permitidas duplicatas. */
-	public void insere(Object x)
+	public void insere(Distancia x)
 	{
 		if (tam == n)
 		{
@@ -155,5 +157,37 @@ public class HeapBinariaMinima<T>
 		}
 		
 		vetor[pos] = x;
+	}
+	public void removeDist(Arvbin arvore)
+	{
+		Cluster clusterEsq = (Cluster) arvore.retornaEsq().retornaVal();
+		Cluster clusterDir = (Cluster) arvore.retornaDir().retornaVal();
+		for(int i = 1; i <= n; i++)
+		{
+			Distancia distanciaAtual = vetor[i];
+			/*
+			 * A ideia aqui é verificar se a distanciaAtual apresenta um dos clusters que combinamos
+			 * como parte dela. Se encontrarmos o clusterEsq, nós calculamos a nova distancia e 
+			 * colocamos na heap. Se encontrarmos o clusterDir, nós removemos da heap para não recalcular duas
+			 * distancias duas vezes.
+			 */
+			Arvbin arvoreA = distanciaAtual.temPonto(clusterEsq); //arvore da distancia que não é igual ao clusterEsq
+			Arvbin arvoreB = distanciaAtual.temPonto(clusterDir); //arvore da distancia que não é igual ao clusterDir
+			if(arvoreB != null)
+			{
+				vetor[i] = vetor[n--];
+				i--;
+			}
+			else if(arvoreA != null)
+			{
+				Distancia novaDistancia = new Distancia(arvoreA, arvore);
+				vetor[i] = novaDistancia;
+			}
+		}
+		refaz(1);
+	}
+	
+	public int getQuant() {
+		return n;
 	}
 }

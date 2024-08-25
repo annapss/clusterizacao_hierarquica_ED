@@ -1,66 +1,99 @@
 package naive;
 import java.util.Deque;
 import java.util.Iterator;
-
-public class Arvbin<T>
+import naive.Cluster;
+public class Arvbin
 {
-	private T val;   /* Valor armazenado na raiz. */
+	private Cluster val;   /* Valor armazenado na raiz. */
 
 	/* Referências para subárvores. */
-	private Arvbin<T> esq, dir;
+	private Arvbin esq, dir;
+	private float somaX;
+	private float somaY;
+	private int qtdNos;
 
 	/* Construtor de árvore sem sub-ávores (dir = esq = null). É fornecido apenas o valor da raiz. */
-	public Arvbin(T valor)
+	public Arvbin(Cluster valor)
 	{
 		val = valor;
 		esq = null;
 		dir = null;
+		somaX = valor.getX();
+		somaY = valor.getY();
+		qtdNos = 1;
 	}
 
 	/* Construtor de árvore com sub-ávores. São fornecidos
 	o valor da raiz e as subárvores, que devem ter sido 
 	construídas previamente.*/
-	public Arvbin(T valor, Arvbin<T> arvEsq, Arvbin<T> arvDir)
+	public Arvbin(Cluster valor, Arvbin arvEsq, Arvbin arvDir)
 	{
 		val = valor;
 		esq = arvEsq;
 		dir = arvDir;
+		somaX = arvEsq.getSomaX() + arvDir.getSomaX();
+		somaY = arvEsq.getSomaY() + arvDir.getSomaY();
+		qtdNos = arvEsq.getQtdNos() + arvDir.getQtdNos();
+	}
+	
+	public float getSomaX() {
+		return somaX;
+	}
+
+	public void setSomaX(float somaX) {
+		this.somaX = somaX;
+	}
+
+	public float getSomaY() {
+		return somaY;
+	}
+
+	public void setSomaY(float somaY) {
+		this.somaY = somaY;
+	}
+
+	public int getQtdNos() {
+		return qtdNos;
+	}
+
+	public void setQtdNos(int qtdNos) {
+		this.qtdNos = qtdNos;
 	}
 
 	/* Retorna o valor armazenado na raiz. */
-	public T retornaVal()
+	public Cluster retornaVal()
 	{
 		return val;
 	}
 
 	/* Retorna a subárvore esquerda 
 	   (ou null se não houver). */
-	public Arvbin<T> retornaEsq()
+	public Arvbin retornaEsq()
 	{
 		return esq;
 	}
 
 	/* Retorna a subárvore direita 
     (ou null se não houver). */
-	public Arvbin<T> retornaDir()
+	public Arvbin retornaDir()
 	{
 		return dir;
 	}
 
 	/* Modifica o valor armazenado na raiz. */
-	public void defineVal(T valor)
+	public void defineVal(Cluster valor)
 	{
 		val = valor;
 	}
 
 	/* Redefine a subárvore esquerda, apagando a antiga se houver. */
-	public void defineEsq(Arvbin<T> filho)
+	public void defineEsq(Arvbin filho)
 	{
 		esq = filho;
 	} 
 
 	/* Redefine a subárvore direita, apagando a antiga se houver. */
-	public void defineDir(Arvbin<T> filho)
+	public void defineDir(Arvbin filho)
 	{
 		dir = filho;
 	}
@@ -114,22 +147,6 @@ public class Arvbin<T>
 	}
 	
 	
-	/* Calcula a soma dos valores dos nós de uma árvore de inteiros. */
-	public static int calculaSoma(Arvbin<Integer> no)
-	{
-		if(no == null)
-			return 0;
-
-		int acumulado = 0;
-						
-		acumulado += calculaSoma(no.esq);
-		
-		acumulado += calculaSoma(no.dir);
-		
-		acumulado += no.val;
-		
-		return acumulado;
-	}
 	
 	public int calculaDiametro()
 	{
@@ -171,7 +188,7 @@ public class Arvbin<T>
 	}
 	
 	/* Método que realiza a impressão de todos os caminhos da raiz para uma folha. */
-	public void imprimeTodosCaminhos(Deque<T> caminhos)
+	public void imprimeTodosCaminhos(Deque<Cluster> caminhos)
 	{
 		/* Adiciona o nó no caminho. */
 		caminhos.addLast(val);
@@ -198,9 +215,9 @@ public class Arvbin<T>
 	}
 
 	/* Método privado auxiliar que imprime os nós contidos na estrutura caminhos. */
-	private void imprimeCaminho(Deque<T> caminhos)
+	private void imprimeCaminho(Deque<Cluster> caminhos)
 	{
-		Iterator<T> iterator = caminhos.iterator();
+		Iterator<Cluster> iterator = caminhos.iterator();
 
 		while(iterator.hasNext())
 		{
