@@ -21,4 +21,4 @@ Alunos que realizaram esse trabalho
 ## Solução Fila de Prioridade
 - Criar uma classe Distancia para representar a distancia entre dois clusters
 - Na fila de prioridade, iremos inserir objetos de Distancia e iremos considerar que as menores distancias terão prioridade.
-- Quando pegamos a menor distância, precisamos recalcular as distâncias do cluster que criamos para os clusters que estavam relacionados aos clusters que juntamos (Qual a forma eficiente de fazer isso ???)
+- Quando pegamos a menor distância, precisamos recalcular as distâncias do cluster que criamos para os clusters que estavam relacionados aos clusters que juntamos
