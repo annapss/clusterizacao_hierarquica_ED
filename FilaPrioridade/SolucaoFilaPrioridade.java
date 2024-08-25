@@ -17,7 +17,7 @@ public class SolucaoFilaPrioridade {
 	{
 		int qtd = 0;
 		Distancia[] distancias = new Distancia[(qtdClustersRestantes * (qtdClustersRestantes - 1))/2];
-		//calclula as distancias e insere na fila (heap)
+		//calcula as distancias e insere na fila (heap)
 		for(int i = 0; i < arvore.length; i++)
 		{
 			if(arvore[i] == null) continue;
@@ -27,34 +27,29 @@ public class SolucaoFilaPrioridade {
 				Arvbin clusterA = arvore[i];
 				Arvbin clusterB = arvore[j];
 				Distancia d = new Distancia(clusterA, clusterB);
-				//if(d.getDistancia() == 0) continue;
 				distancias[qtd++] = d;
 			}
 		}
 		//insere na fila (heap)
 		fila = new HeapBinariaMinima(distancias.length, distancias);
-		//if(fila.getQuant() != 0)
-		//{
-			while(fila.getQuant() > 1) // 
-			{
-				combinaCluster();
-				
-			}
+		while(fila.getQuant() > 1) 
+		{
+			combinaCluster();
 			
-			Distancia min = fila.removeMin(); //pega a menor distancia da fila
-			Arvbin arvoreA = min.getClusterA();
-			Arvbin arvoreB = min.getClusterB();
-			int qtdTotalNos = arvoreA.getQtdNos() + arvoreB.getQtdNos();
-			float somaX = arvoreA.getSomaX() + arvoreB.getSomaX();
-			float somaY = arvoreA.getSomaY() + arvoreB.getSomaY();
-			float clusterCoordX = somaX / qtdTotalNos;
-			float clusterCoordY = somaY / qtdTotalNos;
-			
-			Cluster cluster = new Cluster(clusterCoordX,clusterCoordY); //centroide
-			Arvbin novoCluster = new Arvbin(cluster, arvoreA, arvoreB);
-			return novoCluster;
-		/*}
-		return arvore[0];*/
+		}
+		
+		Distancia min = fila.removeMin(); //pega a menor distancia da fila
+		Arvbin arvoreA = min.getClusterA();
+		Arvbin arvoreB = min.getClusterB();
+		int qtdTotalNos = arvoreA.getQtdNos() + arvoreB.getQtdNos();
+		float somaX = arvoreA.getSomaX() + arvoreB.getSomaX();
+		float somaY = arvoreA.getSomaY() + arvoreB.getSomaY();
+		float clusterCoordX = somaX / qtdTotalNos;
+		float clusterCoordY = somaY / qtdTotalNos;
+		
+		Cluster cluster = new Cluster(clusterCoordX,clusterCoordY); //centroide
+		Arvbin novoCluster = new Arvbin(cluster, arvoreA, arvoreB);
+		return novoCluster;
 	}
 	
 	public void combinaCluster()

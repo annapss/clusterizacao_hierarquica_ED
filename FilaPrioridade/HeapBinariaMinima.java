@@ -160,6 +160,11 @@ public class HeapBinariaMinima
 	}
 	public void removeDist(Arvbin arvore)
 	{
+		/*O p é a quantidade de clusters que geram n distancias*/
+		// n = (p * (p - 1)) /2 -> n é a quantidade de distancias
+		int p = (int)(1 + Math.sqrt((8 * n) + 1)) / 2;
+		p = p - 2;
+		int remocoes = 0;
 		Cluster clusterEsq = (Cluster) arvore.retornaEsq().retornaVal();
 		Cluster clusterDir = (Cluster) arvore.retornaDir().retornaVal();
 		for(int i = 1; i <= n; i++)
@@ -173,10 +178,11 @@ public class HeapBinariaMinima
 			 */
 			Arvbin arvoreA = distanciaAtual.temPonto(clusterEsq); //arvore da distancia que não é igual ao clusterEsq
 			Arvbin arvoreB = distanciaAtual.temPonto(clusterDir); //arvore da distancia que não é igual ao clusterDir
-			if(arvoreB != null)
+			if(arvoreB != null && remocoes < p)
 			{
 				vetor[i] = vetor[n--];
 				i--;
+				remocoes++;
 			}
 			else if(arvoreA != null)
 			{

@@ -13,14 +13,11 @@ public class Main {
 		System.out.println("Quantos pontos devem ser gerados? ");
 		Scanner scan = new Scanner(System.in);
 		int qtdPontos = scan.nextInt();
-		for(int i = 0; i < 1; i++)
+		for(int i = 0; i < 10; i++)
 		{
-			Arvbin[] listaClusters = GeraPontos.geraPontosIguais(qtdPontos);
+			//Arvbin[] listaClusters = GeraPontos.geraPontosIguais(qtdPontos);
 			//Arvbin[] listaClusters = GeraPontos.criaPontos(qtdPontos);
-			/*for(int i = 0; i < listaClusters.length; i++)
-			{
-				System.out.println(listaClusters[i]);
-			}*/
+			Arvbin[] listaClusters = GeraPontos.geraPontos(qtdPontos);
 			long t0 = System.currentTimeMillis();	
 
 			SolucaoFilaPrioridade fila = new SolucaoFilaPrioridade(listaClusters);
@@ -33,7 +30,7 @@ public class Main {
 			tempoMedio += tempoProcessamento;
 			System.out.println("\nTempo linear: " + tempoProcessamento);
 		}
-		tempoMedio = tempoMedio / 1;
+		tempoMedio = tempoMedio / 10;
 		System.out.println("\nTempo medio: " + tempoMedio);
 	}
 }
