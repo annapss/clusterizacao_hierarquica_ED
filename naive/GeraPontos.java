@@ -12,6 +12,7 @@ public class GeraPontos {
 			int y = rand.nextInt(n) + 1;
 			Cluster ponto = new Cluster(x, y);
 			arvore[i] = new Arvbin(ponto);
+			//System.out.println("x: " + x + " y: " + y);
 		}
 		return arvore;
 	}

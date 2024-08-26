@@ -1,4 +1,4 @@
-package filaPrioridade;
+package FilaPrioridade;
 import naive.Arvbin;
 import naive.Cluster;
 public class Distancia {

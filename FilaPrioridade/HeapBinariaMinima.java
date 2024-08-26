@@ -1,4 +1,4 @@
-package filaPrioridade;
+package FilaPrioridade;
 import naive.Arvbin;
 import naive.Cluster;
 public class HeapBinariaMinima
@@ -26,6 +26,13 @@ public class HeapBinariaMinima
 			vetor[ i + 1 ] = v[ i ];
 
 		constroiHeap();
+		for(int i = 1; i <= n; i++)
+		{
+			Cluster a = vetor[i].getClusterA().retornaVal();
+			Cluster b = vetor[i].getClusterB().retornaVal();
+			System.out.println("Cluster A coordX: " + a.getX() + "Cluster A coordY: " + a.getY() + " Cluster B coordX: " + b.getX() + "Cluster B coordY: " + b.getY());
+		}
+		System.out.println();
 	}
 
 	/* Testa se a fila de prioridade está logicamente vazia.
@@ -178,7 +185,7 @@ public class HeapBinariaMinima
 			 */
 			Arvbin arvoreA = distanciaAtual.temPonto(clusterEsq); //arvore da distancia que não é igual ao clusterEsq
 			Arvbin arvoreB = distanciaAtual.temPonto(clusterDir); //arvore da distancia que não é igual ao clusterDir
-			if(arvoreB != null && remocoes < p)
+			if(arvoreB != null && remocoes <= p)
 			{
 				vetor[i] = vetor[n--];
 				i--;
@@ -191,6 +198,13 @@ public class HeapBinariaMinima
 			}
 		}
 		refaz(1);
+		for(int i = 1; i < n; i++)
+		{
+			Cluster a = vetor[i].getClusterA().retornaVal();
+			Cluster b = vetor[i].getClusterB().retornaVal();
+			System.out.println("Cluster A coordX: " + a.getX() + "Cluster A coordY: " + a.getY() + " Cluster B coordX: " + b.getX() + "Cluster B coordY: " + b.getY());
+		}
+		System.out.println();
 	}
 	
 	public int getQuant() {

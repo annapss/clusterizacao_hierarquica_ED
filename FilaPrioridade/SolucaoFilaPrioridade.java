@@ -1,4 +1,4 @@
-package filaPrioridade;
+package FilaPrioridade;
 import naive.Arvbin;
 import naive.Cluster;
 
@@ -17,6 +17,7 @@ public class SolucaoFilaPrioridade {
 	{
 		int qtd = 0;
 		Distancia[] distancias = new Distancia[(qtdClustersRestantes * (qtdClustersRestantes - 1))/2];
+		//System.out.println("Tamanho da fila: " + (qtdClustersRestantes * (qtdClustersRestantes - 1))/2);
 		//calcula as distancias e insere na fila (heap)
 		for(int i = 0; i < arvore.length; i++)
 		{
@@ -39,6 +40,10 @@ public class SolucaoFilaPrioridade {
 		}
 		
 		Distancia min = fila.removeMin(); //pega a menor distancia da fila
+		/*Cluster a = min.getClusterA().retornaVal();
+		Cluster b = min.getClusterB().retornaVal();
+		//System.out.println("Menor dist: " + "Coord X: " + a.getX() + " Coord Y: " + a.getY() + " CoordX: " + b.getX() + " CoordY: " + b.getY());
+		*/
 		Arvbin arvoreA = min.getClusterA();
 		Arvbin arvoreB = min.getClusterB();
 		int qtdTotalNos = arvoreA.getQtdNos() + arvoreB.getQtdNos();
@@ -55,6 +60,10 @@ public class SolucaoFilaPrioridade {
 	public void combinaCluster()
 	{
 		Distancia min = fila.removeMin(); //pega a menor distancia da fila
+		/*Cluster a = min.getClusterA().retornaVal();
+		Cluster b = min.getClusterB().retornaVal();
+		System.out.println("Menor dist: " + "Coord X: " + a.getX() + " Coord Y: " + a.getY() + " CoordX: " + b.getX() + " CoordY: " + b.getY());
+		*/
 		Arvbin arvoreA = min.getClusterA();
 		Arvbin arvoreB = min.getClusterB();
 		int qtdTotalNos = arvoreA.getQtdNos() + arvoreB.getQtdNos();

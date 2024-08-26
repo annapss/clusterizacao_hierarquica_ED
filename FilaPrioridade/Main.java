@@ -1,4 +1,4 @@
-package filaPrioridade;
+package FilaPrioridade;
 
 import java.util.Scanner;
 
@@ -16,11 +16,13 @@ public class Main {
 		for(int i = 0; i < 10; i++)
 		{
 			//Arvbin[] listaClusters = GeraPontos.geraPontosIguais(qtdPontos);
-			//Arvbin[] listaClusters = GeraPontos.criaPontos(qtdPontos);
-			Arvbin[] listaClusters = GeraPontos.geraPontos(qtdPontos);
+			Arvbin[] listaClusters = GeraPontos.criaPontos(qtdPontos);
+			//Arvbin[] listaClusters = GeraPontos.geraPontos(qtdPontos);
+			System.out.println();
 			long t0 = System.currentTimeMillis();	
 
 			SolucaoFilaPrioridade fila = new SolucaoFilaPrioridade(listaClusters);
+			//System.out.println("Fila: ");
 			Arvbin arvore = fila.clusterizacaoHierarquica();
 			arvore.mostra();
 			
