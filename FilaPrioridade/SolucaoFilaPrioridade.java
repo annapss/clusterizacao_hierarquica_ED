@@ -33,6 +33,8 @@ public class SolucaoFilaPrioridade {
 		}
 		//insere na fila (heap)
 		fila = new HeapBinariaMinima(distancias.length, distancias);
+		//fila.imprimeHeap();
+		
 		while(fila.getQuant() > 1) 
 		{
 			combinaCluster();

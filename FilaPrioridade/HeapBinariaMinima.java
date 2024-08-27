@@ -26,13 +26,13 @@ public class HeapBinariaMinima
 			vetor[ i + 1 ] = v[ i ];
 
 		constroiHeap();
-		for(int i = 1; i <= n; i++)
+		/*for(int i = 1; i <= n; i++)
 		{
 			Cluster a = vetor[i].getClusterA().retornaVal();
 			Cluster b = vetor[i].getClusterB().retornaVal();
 			System.out.println("Cluster A coordX: " + a.getX() + "Cluster A coordY: " + a.getY() + " Cluster B coordX: " + b.getX() + "Cluster B coordY: " + b.getY());
 		}
-		System.out.println();
+		System.out.println();*/
 	}
 
 	/* Testa se a fila de prioridade está logicamente vazia.
@@ -86,7 +86,7 @@ public class HeapBinariaMinima
 		itemMin = vetor[1];
 		vetor[1] = vetor[n];
 		n--;
-		refaz(1);
+		// refaz(1);
 		
 		return itemMin;
 	}
@@ -185,7 +185,7 @@ public class HeapBinariaMinima
 			 */
 			Arvbin arvoreA = distanciaAtual.temPonto(clusterEsq); //arvore da distancia que não é igual ao clusterEsq
 			Arvbin arvoreB = distanciaAtual.temPonto(clusterDir); //arvore da distancia que não é igual ao clusterDir
-			if(arvoreB != null && remocoes <= p)
+			if(arvoreB != null && remocoes < p)
 			{
 				vetor[i] = vetor[n--];
 				i--;
@@ -198,16 +198,25 @@ public class HeapBinariaMinima
 			}
 		}
 		refaz(1);
-		for(int i = 1; i < n; i++)
+		/*for(int i = 1; i < n; i++)
 		{
 			Cluster a = vetor[i].getClusterA().retornaVal();
 			Cluster b = vetor[i].getClusterB().retornaVal();
 			System.out.println("Cluster A coordX: " + a.getX() + "Cluster A coordY: " + a.getY() + " Cluster B coordX: " + b.getX() + "Cluster B coordY: " + b.getY());
-		}
-		System.out.println();
+		}*/
+		//System.out.println();
 	}
 	
 	public int getQuant() {
 		return n;
+	}
+	
+	public void imprimeHeap()
+	{
+		for(int i = 1; i <= n; i++)
+		{
+			System.out.println(vetor[i].getDistancia());
+		}
+		throw new IllegalArgumentException();
 	}
 }

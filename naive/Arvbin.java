@@ -33,7 +33,7 @@ public class Arvbin
 		dir = arvDir;
 		somaX = arvEsq.getSomaX() + arvDir.getSomaX();
 		somaY = arvEsq.getSomaY() + arvDir.getSomaY();
-		qtdNos = arvEsq.getQtdNos() + arvDir.getQtdNos();
+		qtdNos = arvEsq.getQtdNos() + arvDir.getQtdNos() + 1;
 	}
 	
 	public float getSomaX() {
