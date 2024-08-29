@@ -5,16 +5,8 @@ public class Cluster {
 	private float y;
 	public Cluster(float x, float y) {
 		super();
-		float val = x;
-		val = val*100;
-		val = Math.round(val);
-		val = val /100;
-		this.x = val;
-		val = y;
-		val = val*100;
-		val = Math.round(val);
-		val = val /100;
-		this.y = val;
+		this.x = x;
+		this.y = y;
 	}
 	public float getX() {
 		return x;

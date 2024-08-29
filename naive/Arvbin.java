@@ -6,13 +6,15 @@ public class Arvbin
 {
 	private Cluster val;   /* Valor armazenado na raiz. */
 
-	/* Referências para subárvores. */
+	/* Referï¿½ncias para subï¿½rvores. */
 	private Arvbin esq, dir;
 	private float somaX;
 	private float somaY;
 	private int qtdNos;
 
-	/* Construtor de árvore sem sub-ávores (dir = esq = null). É fornecido apenas o valor da raiz. */
+	private int totalNos;
+
+	/* Construtor de ï¿½rvore sem sub-ï¿½vores (dir = esq = null). ï¿½ fornecido apenas o valor da raiz. */
 	public Arvbin(Cluster valor)
 	{
 		val = valor;
@@ -21,11 +23,12 @@ public class Arvbin
 		somaX = valor.getX();
 		somaY = valor.getY();
 		qtdNos = 1;
+		totalNos = 1;
 	}
 
-	/* Construtor de árvore com sub-ávores. São fornecidos
-	o valor da raiz e as subárvores, que devem ter sido 
-	construídas previamente.*/
+	/* Construtor de ï¿½rvore com sub-ï¿½vores. Sï¿½o fornecidos
+	o valor da raiz e as subï¿½rvores, que devem ter sido 
+	construï¿½das previamente.*/
 	public Arvbin(Cluster valor, Arvbin arvEsq, Arvbin arvDir)
 	{
 		val = valor;
@@ -33,7 +36,8 @@ public class Arvbin
 		dir = arvDir;
 		somaX = arvEsq.getSomaX() + arvDir.getSomaX();
 		somaY = arvEsq.getSomaY() + arvDir.getSomaY();
-		qtdNos = arvEsq.getQtdNos() + arvDir.getQtdNos() + 1;
+		qtdNos = arvEsq.getQtdNos() + arvDir.getQtdNos();
+		totalNos = esq.getTotalNos() + dir.getTotalNos() + 1;
 	}
 	
 	public float getSomaX() {
@@ -66,15 +70,15 @@ public class Arvbin
 		return val;
 	}
 
-	/* Retorna a subárvore esquerda 
-	   (ou null se não houver). */
+	/* Retorna a subï¿½rvore esquerda 
+	   (ou null se nï¿½o houver). */
 	public Arvbin retornaEsq()
 	{
 		return esq;
 	}
 
-	/* Retorna a subárvore direita 
-    (ou null se não houver). */
+	/* Retorna a subï¿½rvore direita 
+    (ou null se nï¿½o houver). */
 	public Arvbin retornaDir()
 	{
 		return dir;
@@ -86,19 +90,19 @@ public class Arvbin
 		val = valor;
 	}
 
-	/* Redefine a subárvore esquerda, apagando a antiga se houver. */
+	/* Redefine a subï¿½rvore esquerda, apagando a antiga se houver. */
 	public void defineEsq(Arvbin filho)
 	{
 		esq = filho;
 	} 
 
-	/* Redefine a subárvore direita, apagando a antiga se houver. */
+	/* Redefine a subï¿½rvore direita, apagando a antiga se houver. */
 	public void defineDir(Arvbin filho)
 	{
 		dir = filho;
 	}
 
-	/* Imprime o conteúdo da árvore em pré-ordem */
+	/* Imprime o conteï¿½do da ï¿½rvore em prï¿½-ordem */
 	public void mostra()
 	{
 		System.out.print("(" + val);
@@ -109,10 +113,10 @@ public class Arvbin
 		System.out.print(")");
 	}
 	
-	/* Verifica se um valor está na árvore. Se estiver, retorna um ponteiro para o
-	   o nó que tem esse valor. Caso contrário, retorna null. */
+	/* Verifica se um valor estï¿½ na ï¿½rvore. Se estiver, retorna um ponteiro para o
+	   o nï¿½ que tem esse valor. Caso contrï¿½rio, retorna null. */
 	
-	/* Calcula e retorna o número de nós na árvore. */
+	/* Calcula e retorna o nï¿½mero de nï¿½s na ï¿½rvore. */
 	public int contaNos()
 	{
 		if((esq == null) && (dir == null))
@@ -129,7 +133,7 @@ public class Arvbin
 		return 1 + nosEsq + nosDir;
 	}
 	
-	/* Calcula e retorna a altura da árvore. */
+	/* Calcula e retorna a altura da ï¿½rvore. */
 	public int calculaAltura()
 	{
 		if((esq == null) && (dir == null))
@@ -150,13 +154,13 @@ public class Arvbin
 	
 	public int calculaDiametro()
 	{
-		/* Caso base, quando é uma folha. */
+		/* Caso base, quando ï¿½ uma folha. */
 		if((esq == null) && (dir == null))
 		{
 			return 1;
 		}
 		
-		/* Calcula a altura das subárvores esquerda e direita do nó. */
+		/* Calcula a altura das subï¿½rvores esquerda e direita do nï¿½. */
 		int alturaEsq = 0, alturaDir = 0;
 		
 		if(esq != null)
@@ -167,9 +171,9 @@ public class Arvbin
 		
 		int maxDistanciaNo = alturaEsq + alturaDir + 1;
 		
-		/* Nesse ponto, temos a maior distância entre dois nós da árvore
-		 * que passa pelo nó corrente (this). Agora devemos calcular esse
-		 * valor para as subárvores esquerda e direita, comparando depois. */		
+		/* Nesse ponto, temos a maior distï¿½ncia entre dois nï¿½s da ï¿½rvore
+		 * que passa pelo nï¿½ corrente (this). Agora devemos calcular esse
+		 * valor para as subï¿½rvores esquerda e direita, comparando depois. */		
 		
 		int maxDistanciaEsq = 0, maxDistanciaDir = 0;
 		
@@ -187,20 +191,20 @@ public class Arvbin
 			return maxDistanciaFilhos;
 	}
 	
-	/* Método que realiza a impressão de todos os caminhos da raiz para uma folha. */
+	/* Mï¿½todo que realiza a impressï¿½o de todos os caminhos da raiz para uma folha. */
 	public void imprimeTodosCaminhos(Deque<Cluster> caminhos)
 	{
-		/* Adiciona o nó no caminho. */
+		/* Adiciona o nï¿½ no caminho. */
 		caminhos.addLast(val);
 
-		/* Caso base: quando é uma folha. */
+		/* Caso base: quando ï¿½ uma folha. */
 		if((esq == null) && (dir == null))
 		{
 			/* Chegou-se ao fim do caminho, portanto deve-se imprimi-lo. */
 			imprimeCaminho(caminhos);
 		}
 
-		/* Caso geral: deve-se fazer a recursão para os nós esquerdo (se houver) e 
+		/* Caso geral: deve-se fazer a recursï¿½o para os nï¿½s esquerdo (se houver) e 
 		 * para o direito (se houver). */
 		
 		if(esq != null)
@@ -209,12 +213,12 @@ public class Arvbin
 		if(dir != null)
 			dir.imprimeTodosCaminhos(caminhos);
 		
-		/* Remove o nó corrente do caminho após as chamadas recursivas para os
-		 * nós esquerdo e direito. */ 
+		/* Remove o nï¿½ corrente do caminho apï¿½s as chamadas recursivas para os
+		 * nï¿½s esquerdo e direito. */ 
 		caminhos.removeLast();
 	}
 
-	/* Método privado auxiliar que imprime os nós contidos na estrutura caminhos. */
+	/* Mï¿½todo privado auxiliar que imprime os nï¿½s contidos na estrutura caminhos. */
 	private void imprimeCaminho(Deque<Cluster> caminhos)
 	{
 		Iterator<Cluster> iterator = caminhos.iterator();
@@ -225,5 +229,9 @@ public class Arvbin
 		}
 
 		System.out.println();
+	}
+
+	public int getTotalNos() {
+		return totalNos;
 	}
 }
