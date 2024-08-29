@@ -4,17 +4,20 @@ import naive.Arvbin;
 
 public class HeapBinariaMinima
 {
-	private int n;               /* Numero de elementos no heap. */   
-	private int tam;             /* Tamanho m�ximo do heap. */
-	private Distancia[] vetor;          /* Vetor com elementos. */
+	private int n;               /* Numero de elementos atualmente no heap. */   
+	private int tam;             /* Tamanho máximo do heap. */
+	private Distancia[] vetor;   /* Vetor com elementos. */
 
-	/* Constr�i heap a partir de vetor v. */
+	/* Constrói heap de distâncias a partir de vetor v. */
 	public HeapBinariaMinima(int qtdPontos, Arvbin[] v)
 	{
+
+		// O total de distâncias no início do algoritmo será de (n * (n - 1)) / 2, levando em consideração a regra matemática de combinatória.
 		vetor = new Distancia[(qtdPontos * (qtdPontos - 1)) / 2 + 1];
 		tam = vetor.length;
 		n = 1;
 
+		// Esse trecho, de fato, cria as distâncias que serão utilizadas posteriormente.
 		for (int i = 0; i < qtdPontos; i++) {
 			if (v[i] == null) continue;
 			for (int j = i + 1; j < qtdPontos; j++) {
@@ -23,28 +26,23 @@ public class HeapBinariaMinima
 			}
 		}
 
+		// Como o n fora iniciado como 1, é necessário corrigir sua falha de 1.
 		n--;
 
 		constroiHeap();
 	}
 
-	/* Testa se a fila de prioridade est� logicamente vazia.
-	   Retorna true se vazia, false, caso contr�rio. */
+	/* Testa se a fila de prioridade está logicamente vazia.
+	   Retorna true se vazia, false, caso contrário. */
 	public boolean vazia()
 	{
 		return n == 0;
 	}
 
-	/* Faz a lista de prioridades logicamente vazia. */
-	public void fazVazia()
-	{
-		n = 0;
-	}
-
 	/* Imprime os elementos da heap. */
 	public void imprime()
 	{
-		System.out.print("Conte�do da heap: ");
+		System.out.print("Conteúdo da heap: ");
 		
 		for(int i = 1; i <= n; i++)
 			System.out.print(vetor[i] + " ");
@@ -70,16 +68,16 @@ public class HeapBinariaMinima
 		return itemMin;
 	}
 
-	/* M�todo auxiliar que estabelece a propriedade de ordem do heap a 
-	 * partir de um vetor arbitr�rio dos itens. */
+	/* Método auxiliar que estabelece a propriedade de ordem do heap a 
+	 * partir de um vetor arbitrário dos itens. */
 	private void constroiHeap()
 	{
 		for( int i = n / 2; i > 0; i-- )
 			refaz(i);
 	}
 
-	/* M�todo auxiliar para restaurar a propriedade de heap que
-	 * n�o est� sendo respeitada pelo n� i. */
+	/* Método auxiliar para restaurar a propriedade de heap que
+	 * não está sendo respeitada pelo nó i. */
 	private void refaz(int i)
 	{
 		Distancia x = vetor[ i ];
@@ -91,13 +89,13 @@ public class HeapBinariaMinima
 			filhoEsq = 2*i;
 			filhoDir = 2*i + 1;
 			
-			/* Por enquanto, o menor filho � o da esquerda. */
+			/* Por enquanto, o menor filho é o da esquerda. */
 			menorFilho = filhoEsq;
 			
 			/* Verifica se o filho direito existe. */
 			if(filhoDir <= n)
 			{
-				 /* Em caso positivo, verifica se � menor que o filho esquerdo. */
+				 /* Em caso positivo, verifica se é menor que o filho esquerdo. */
 				if(vetor[ filhoDir ].getDistancia() < vetor[ filhoEsq ].getDistancia())
 					menorFilho = filhoDir;
 			}
@@ -108,71 +106,54 @@ public class HeapBinariaMinima
 			else
 				break;
 			
-			/* Como o elemento x que estava na posi��o "i" desceu para o n�vel de baixo, a pr�xima
-			 * itera��o vai verificar a possibilidade de trocar esse elemento x (agora na 
-			 * posi��o "menorFilho") com um de seus novos filhos. */
+			/* Como o elemento x que estava na posição "i" desceu para o nível de baixo, a próxima
+			 * iteração vai verificar a possibilidade de trocar esse elemento x (agora na 
+			 * posição "menorFilho") com um de seus novos filhos. */
 			i = menorFilho;
 		}
 		
 		vetor[ i ] = x;
 	}
 
-	/* Insere item x na fila de prioridade, mantendo a propriedade do heap.
-	 * S�o permitidas duplicatas. */
-	public void insere(Distancia x)
-	{
-		if (tam == n)
-		{
-			System.out.println("Fila de prioridades cheia!");
-			return;
-		}
 
-		/* O elemento � inicialmente inserido na primeira posi��o dispon�vel
-		 * na �rvore, considerando de cima para baixo, da esquerda para a direita. */
-		n++;
-		int pos = n;
-		
-		/* Sentinela utilizada para tratar o caso do pai do n� raiz (de �ndice 1). */
-		vetor[0] = x;
-
-		/* Refaz heap (sobe elemento). */
-		while(x.getDistancia() < vetor[pos/2].getDistancia())
-		{
-			vetor[pos] = vetor[ pos/2 ];
-			pos /= 2;
-		}
-		
-		vetor[pos] = x;
-	}
-
+	// Código para adaptação da heap para a nova distância gerada
 	public void remontaDistancias(Arvbin nova) {
+		
+		// Inicialmente, pega-se os centróides/pontos envolvidos na nova distância.
 		Arvbin arvoreEsquerda = nova.retornaEsq();
 		Arvbin arvoreDireita = nova.retornaDir();
 
+		// Itera-se por todos os elementos da heap para verificar quais distâncias envolviam algum dos dois centróides/pontos.
 		for (int i = 1; i < n + 1; i++) {
 
+			// Caso o centróide/ponto posicionado na ESQUERDA do novo centróide esteja presente na distância a ser verificada, exclui-se a distância da heap.
 			if (verificaPossuir(vetor[i], arvoreEsquerda)) {
 				vetor[i--] = vetor[n--];
 
 			}
+			// Caso o centróide/ponto posicionado na DIREITA do novo centróide esteja presente na distância a ser verificada, substitui-o pela Distância entre o
+			// outro centróide/ponto da distância verificada com o novo centróide gerado.
 			else if (verificaPossuir(vetor[i], arvoreDireita)) {
-				Distancia a = new Distancia(retornaInversa(vetor[i], arvoreDireita), nova);
-				vetor[i] = a;
+				vetor[i] = new Distancia(retornaInversa(vetor[i], arvoreDireita), nova);
 			}
 		}
 
+		// Reordena a HEAP para usos posteriores
 		refaz(1);
 	}
 
+	// Método que verifica se a distância em questão possui o centróide/ponto em sua construção.
 	public boolean verificaPossuir(Distancia a, Arvbin b) {
 		return (a.getClusterA().equals(b) || a.getClusterB().equals(b));
 	}
 
+	// Método que retorna o centróide/ponto que é diferente do verificado da distância.
 	public Arvbin retornaInversa(Distancia a, Arvbin b) {
 		if (a.getClusterA().equals(b)) return a.getClusterB();
 		else return a.getClusterA();
 	}
 
+	// Retorna a quantidade de Distâncias presentes na heap no momento.
 	public int qtdElementos() {
 		return n;
 	}
