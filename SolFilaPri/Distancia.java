@@ -11,7 +11,7 @@ public class Distancia {
     public Distancia(Arvbin clusterA, Arvbin clusterB) {
         this.clusterA = clusterA;
         this.clusterB = clusterB;
-        this.distancia = (float) Math.sqrt(Math.pow(clusterA.retornaVal().getX() + clusterB.retornaVal().getX(), 2) + Math.pow(clusterA.retornaVal().getY() + clusterB.retornaVal().getY(), 2));
+        this.distancia = clusterA.retornaVal().distanciaPonto(clusterB.retornaVal());
     }
 
     public float getDistancia() {
