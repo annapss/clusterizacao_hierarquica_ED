@@ -2,6 +2,8 @@ package naive;
 import java.util.Random;
 import java.util.Scanner;
 public class GeraPontos {
+
+	// Método usado para gerar N pontos aleatórios com suas coordenadas variando de 1 a N.
 	public static Arvbin[] geraPontos(int n)
 	{
 		Random rand = new Random();
@@ -10,13 +12,13 @@ public class GeraPontos {
 		{
 			int x = rand.nextInt(n) + 1;
 			int y = rand.nextInt(n) + 1;
-			Cluster ponto = new Cluster(x, y);
+			Ponto ponto = new Ponto(x, y);
 			arvore[i] = new Arvbin(ponto);
-			//System.out.println("x: " + x + " y: " + y);
 		}
 		return arvore;
 	}
 	
+	// Método usado para gerar N pontos IGUAIS.
 	public static Arvbin[] geraPontosIguais(int n)
 	{
 		Arvbin[] arvore = new Arvbin[n];
@@ -24,16 +26,13 @@ public class GeraPontos {
 		{
 			int x = 1;
 			int y = 2;
-			Cluster ponto = new Cluster(x, y);
+			Ponto ponto = new Ponto(x, y);
 			arvore[i] = new Arvbin(ponto);
 		}
-		/*int x = 3;
-		int y = 4;
-		Cluster ponto = new Cluster(x, y);
-		arvore[n - 1] = new Arvbin(ponto);*/
 		return arvore;
 	}
 	
+	// Método usado para gerar N pontos pré-definidos pelo usuário.
 	public static Arvbin[] criaPontos(int n){
 		Scanner scan = new Scanner(System.in);
 		Arvbin[] arvore = new Arvbin[n];
@@ -41,7 +40,7 @@ public class GeraPontos {
 		{
 			int x = scan.nextInt();
 			int y = scan.nextInt();
-			Cluster ponto = new Cluster(x, y);
+			Ponto ponto = new Ponto(x, y);
 			arvore[i] = new Arvbin(ponto);
 		}
 		return arvore;
