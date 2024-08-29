@@ -53,7 +53,7 @@ public class Naive {
 		}
 		
 		// Cálculo do novo centróide a partir dos clusteres/pontos envolvidos
-		int qtdTotalNos = arvore[clustersCombinados[0]].getQtdNos() + arvore[clustersCombinados[1]].getQtdNos();
+		int qtdTotalNos = arvore[clustersCombinados[0]].getQtdPontos() + arvore[clustersCombinados[1]].getQtdPontos();
 		float somaX = arvore[clustersCombinados[0]].getSomaX() + arvore[clustersCombinados[1]].getSomaX();
 		float somaY = arvore[clustersCombinados[0]].getSomaY() + arvore[clustersCombinados[1]].getSomaY();
 		float clusterCoordX = somaX / qtdTotalNos;

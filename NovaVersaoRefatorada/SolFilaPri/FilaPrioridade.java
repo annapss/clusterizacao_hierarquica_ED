@@ -45,7 +45,7 @@ public class FilaPrioridade {
     public Ponto fazNovoCentroide(Arvbin a, Arvbin b) {
 
         // Basicamente gera a média entre todos os pontos até agora considerados.
-        int qtdTotalNos = a.getQtdNos() + b.getQtdNos();
+        int qtdTotalNos = a.getQtdPontos() + b.getQtdPontos();
         float somaX = a.getSomaX() + b.getSomaX();
         float somaY = a.getSomaY() + b.getSomaY();
         float clusterCoordX = somaX / qtdTotalNos;

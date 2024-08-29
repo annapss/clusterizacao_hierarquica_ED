@@ -6,9 +6,9 @@ public class Arvbin
 
 	/* Referências para sub-árvores. */
 	private Arvbin esq, dir;
-	private float somaX; // Valor usado para cálculo do novo centróide
-	private float somaY; // Valor usado para cálculo do novo centróide
-	private int qtdNos;  // Valor usado para cálculo do novo centróide
+	private float somaX; 	// Valor usado para cálculo do novo centróide
+	private float somaY; 	// Valor usado para cálculo do novo centróide
+	private int qtdPontos;  // Valor usado para cálculo do novo centróide
 
 	private int totalNos; // Total de nós na árvore, usado para depuração do código. Foi certificado que a quantidade de nós final deverá ser 2n - 1.
 
@@ -21,7 +21,7 @@ public class Arvbin
 		dir = null;
 		somaX = valor.getX();
 		somaY = valor.getY();
-		qtdNos = 1;
+		qtdPontos = 1;
 		totalNos = 1;
 	}
 
@@ -36,7 +36,7 @@ public class Arvbin
 		dir = arvDir;
 		somaX = arvEsq.getSomaX() + arvDir.getSomaX();
 		somaY = arvEsq.getSomaY() + arvDir.getSomaY();
-		qtdNos = arvEsq.getQtdNos() + arvDir.getQtdNos();
+		qtdPontos = arvEsq.getQtdPontos() + arvDir.getQtdPontos();
 		totalNos = esq.getTotalNos() + dir.getTotalNos() + 1;
 	}
 	
@@ -48,8 +48,8 @@ public class Arvbin
 		return somaY;
 	}
 
-	public int getQtdNos() {
-		return qtdNos;
+	public int getQtdPontos() {
+		return qtdPontos;
 	}
 
 	/* Retorna o valor armazenado na raiz. */
