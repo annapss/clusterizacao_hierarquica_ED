@@ -5,15 +5,6 @@ public class Naive {
 	private int qtdClustersRestantes; //quantidade de clusters que ainda precisam ser combinados
 	
 	@SuppressWarnings("unchecked")
-	public Naive(Ponto[] pontos) //se a gente n�o tiver mais usando esse construtor, acho que podemos tirar
-	{
-		arvore = new Arvbin[pontos.length];
-		qtdClustersRestantes = pontos.length;
-		for(int i = 0; i < pontos.length; i++)
-		{
-			arvore[i] = new Arvbin(pontos[i]);
-		}
-	}
 
 	public Naive(Arvbin[] arv) {
 		this.arvore = arv;
